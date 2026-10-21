@@ -1,0 +1,316 @@
+/* משתני צבע לאווירה קסומה-אפלה (ברירת מחדל) */
+:root {
+    --bg-main: #0a0a0e;
+    --bg-alt: #12121a;
+    --text-main: #e0e0e0;
+    --text-muted: #a0a0b0;
+    --accent-gold: #e6a822;
+    --accent-glow: rgba(230, 168, 34, 0.6);
+    --overlay-color: rgba(10, 10, 14, 0.9);
+    --font-heading: 'Frank Ruhl Libre', serif;
+    --font-body: 'Rubik', sans-serif;
+}
+
+/* משתני צבע למצב יום (עולם אנושי) */
+body.light-mode {
+    --bg-main: #f4f4f9;
+    --bg-alt: #eaeaef;
+    --text-main: #222222;
+    --text-muted: #555555;
+    --accent-gold: #a65d03; /* כתום/זהב כהה יותר כדי לבלוט על בהיר */
+    --accent-glow: rgba(166, 93, 3, 0.2);
+    --overlay-color: rgba(244, 244, 249, 0.9);
+}
+
+/* איפוס כללי */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* תפריט ניווט */
+.navbar {
+    background-color: var(--overlay-color);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(230, 168, 34, 0.2);
+    transition: background-color 0.5s ease;
+}
+
+.nav-brand {
+    font-family: var(--font-heading);
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 300;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-gold);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* כפתור החלפת נושא (Theme Toggle) */
+.theme-btn {
+    background: transparent;
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+.theme-btn:hover {
+    background: var(--accent-gold);
+    color: var(--bg-main);
+}
+
+/* אזור ראשי (Hero) */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url('https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, var(--bg-main) 100%);
+    z-index: 1;
+    transition: background 0.5s ease;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 1rem;
+}
+
+.glow-text {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    color: #fff;
+    text-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-gold);
+    margin-bottom: 1rem;
+    transition: color 0.5s ease;
+}
+body.light-mode .glow-text {
+    color: #111; /* ביום הטקסט שחור עם הילה כתומה */
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    font-weight: 300;
+}
+
+/* עיצוב אזורי תוכן */
+.content-section {
+    padding: 5rem 2rem;
+}
+
+.bg-darker {
+    background-color: var(--bg-alt);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--accent-gold);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.section-title { font-size: 2.5rem; }
+.text-gold { color: var(--accent-gold); }
+.mt-4 { margin-top: 2rem; }
+
+.container p {
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+
+/* רשימת מילון מושגים */
+.glossary-list {
+    list-style: none;
+    text-align: right;
+}
+
+.glossary-list li {
+    margin-bottom: 1rem;
+    background: rgba(128,128,128,0.05);
+    padding: 1rem;
+    border-right: 3px solid var(--accent-gold);
+}
+
+.glossary-list strong {
+    color: var(--accent-gold);
+}
+
+/* כפתורים וטיימר */
+.cta-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-gold);
+    color: var(--bg-main);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* עיצוב הטיימר */
+.countdown-container {
+    margin: 3rem auto;
+    padding: 1.5rem;
+    border: 1px solid rgba(230, 168, 34, 0.3);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.2);
+    display: inline-block;
+}
+.countdown-timer {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.countdown-timer span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--accent-gold);
+    font-family: var(--font-heading);
+}
+
+/* מחולל הרעיונות */
+.generator-result {
+    min-height: 3rem;
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-main);
+    font-style: italic;
+}
+
+/* פוטר ודלת סודית */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--bg-alt);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(128,128,128,0.1);
+    position: relative;
+}
+
+.secret-door {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    opacity: 0.1; /* בקושי רואים את זה */
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: opacity 0.3s;
+}
+.secret-door:hover {
+    opacity: 0.8;
+    background-color: var(--accent-gold);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* מודאל (החלון הקופץ של הדלת הסודית) */
+.secret-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.secret-modal.active {
+    display: flex; /* כשהקלאס active קיים, החלון מופיע */
+}
+.secret-content {
+    background: #0a0a0e;
+    padding: 3rem;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 30px var(--accent-glow);
+    max-width: 500px;
+    color: #e0e0e0;
+}
+body.light-mode .secret-content {
+    background: #f4f4f9;
+    color: #222;
+}
+
+/* התאמה למסכים קטנים */
+@media (max-width: 768px) {
+    .glow-text { font-size: 3rem; }
+    .nav-links { display: none; }
+    .section-title { font-size: 2rem; }
+    .countdown-timer { gap: 0.8rem; }
+    .countdown-timer span { font-size: 1.8rem; }
+}
