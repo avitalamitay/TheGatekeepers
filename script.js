@@ -104,4 +104,23 @@ document.addEventListener('DOMContentLoaded', () => {
     closeSecretBtn.addEventListener('click', () => {
         secretModal.classList.remove('active');
     });
+
+    // --- 5. תפריט מובייל (המבורגר) ---
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    if(mobileBtn && navLinks) {
+        // פתיחה וסגירה של התפריט בלחיצה על ההמבורגר
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // סגירה אוטומטית של התפריט אחרי שלוחצים על אחד הקישורים (כדי שהמסך לא יישאר חסום)
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    }
 });
