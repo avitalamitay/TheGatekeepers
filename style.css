@@ -306,11 +306,50 @@ body.light-mode .secret-content {
     color: #222;
 }
 
-/* התאמה למסכים קטנים */
+/* כפתור המבורגר למובייל (מוסתר כברירת מחדל במסכים גדולים) */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--accent-gold);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* התאמה למסכים קטנים (מובייל) */
 @media (max-width: 768px) {
     .glow-text { font-size: 3rem; }
-    .nav-links { display: none; }
     .section-title { font-size: 2rem; }
     .countdown-timer { gap: 0.8rem; }
     .countdown-timer span { font-size: 1.8rem; }
+    
+    /* מציגים את כפתור ההמבורגר */
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    /* משנים את התפריט שיהיה נגלל מלמעלה למטה */
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        background-color: var(--overlay-color);
+        flex-direction: column;
+        padding: 1.5rem 0;
+        gap: 1.5rem;
+        /* מסתירים אותו מחוץ למסך כל עוד לא לחצו */
+        transform: translateY(-150%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(230, 168, 34, 0.2);
+    }
+
+    /* הקלאס שנוסיף דרך ה-JS כדי להציג את התפריט */
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
