@@ -12,13 +12,19 @@
 
     <!-- תפריט ניווט -->
     <nav class="navbar">
-        <ul class="nav-links">
+        <div class="nav-brand">שומרות הסף</div>
+        
+        <!-- הכפתור החדש למובייל (יוסתר במסכים גדולים) -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+        
+        <!-- הוספנו כאן id="nav-links" כדי שהסקריפט יוכל למצוא אותו -->
+        <ul id="nav-links" class="nav-links">
             <li><a href="#home">ראשי</a></li>
             <li><a href="#characters">דמויות</a></li>
             <li><a href="#about">על המשחק</a></li>
             <li><a href="#glossary">מילון מושגים</a></li>
             <li><a href="#world">העולם</a></li>
-            <li><a href="#mechanics">מכאניקה</a></li>
+            <li><a href="#mechanics">מכניקה</a></li>
             <li><a href="#technical">פרטים טכניים</a></li>
             <!-- כפתור החלפת עולם -->
             <li><button id="theme-toggle" class="theme-btn">עבור לעולם האנושי (מצב בהיר)</button></li>
