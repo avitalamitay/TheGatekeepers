@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     themeBtn.addEventListener('click', () => {
         body.classList.toggle('light-mode');
         if (body.classList.contains('light-mode')) {
-            themeBtn.textContent = 'חזור לגחלת (מצב אפל)';
+            themeBtn.textContent = 'לגחלת (מצב אפל)';
         } else {
-            themeBtn.textContent = 'עבור לעולם האנושי (מצב בהיר)';
+            themeBtn.textContent = 'לעולם האנושי (מצב בהיר)';
         }
     });
 
@@ -56,7 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
         "כשראית משהו מוזר במוזיאון",
         "כשהכנת יצירת אמנות ממש מיוחדת"
     ];
-    const ages = ["בגיל 18", "בגיל 24", "ממש לפני חודש", "בגיל 12", "בגיל 27"];
+    const ages = [
+        "בגיל 18",
+        "בגיל 24",
+        "ממש לפני חודש",
+        "לפני חצי שנה",
+        "לפני ארבעה ימים ו15 שעות",
+        "בגיל 12", 
+        "בגיל 7", 
+        "בגיל 5", 
+        "בגיל 8", 
+        "בגיל 10", 
+        "בגיל 14", 
+        "בגיל 15", 
+        "בגיל 16", 
+        "בגיל 17", 
+        "בגיל 19", 
+        "בגיל 20", 
+        "בגיל 21", 
+        "בגיל 22", 
+        "בגיל 23", 
+        "בגיל 25", 
+        "בגיל 26", 
+        "בגיל 27"
+        ];
 
     generateBtn.addEventListener('click', () => {
         const randomCreature = creatures[Math.floor(Math.random() * creatures.length)];
