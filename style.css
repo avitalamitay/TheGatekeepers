@@ -7,8 +7,8 @@
     --accent-gold: #e6a822;
     --accent-glow: rgba(230, 168, 34, 0.6);
     --overlay-color: rgba(10, 10, 14, 0.9);
-    --font-heading: 'Frank Ruhl Libre', serif;
-    --font-body: 'Rubik', sans-serif;
+    --font-heading: 'Bona Nova', serif;
+    --font-body: 'rubik', sans-serif;
 }
 
 /* משתני צבע למצב יום (עולם אנושי) */
@@ -176,6 +176,16 @@ body.light-mode .glow-text {
     font-size: 1.1rem;
 }
 
+/* טקסט קטן להערות צד וקרדיטים */
+.container p.small-note,
+.small-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
 /* רשימת מילון מושגים */
 .glossary-list {
     list-style: none;
@@ -187,6 +197,7 @@ body.light-mode .glow-text {
     background: rgba(128,128,128,0.05);
     padding: 1rem;
     border-right: 3px solid var(--accent-gold);
+    text-align: justify;
 }
 
 .glossary-list strong {
@@ -264,20 +275,27 @@ footer {
 
 .secret-door {
     display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--text-muted);
-    opacity: 0.1; /* בקושי רואים את זה */
+    width: 22px;
+    height: 22px;
+    color: var(--accent-glow);
+    opacity: 0.5; /* בקושי רואים את זה */
     cursor: pointer;
-    margin-top: 1rem;
-    transition: opacity 0.3s;
+    margin-bottom: 0.8rem;
+    transition: all 0.4s ease;
 }
+
+.secret-door svg {
+    width: 100%;
+    height: 100%;
+}
+
 .secret-door:hover {
-    opacity: 0.8;
-    background-color: var(--accent-gold);
-    box-shadow: 0 0 10px var(--accent-glow);
+    opacity: 0.9;
+    color: var(--accent-gold);
+    filter: drop-shadow(0 0 8px var(--accent-glow));
+    transform: scale(1.15);
 }
+
 
 /* מודאל (החלון הקופץ של הדלת הסודית) */
 .secret-modal {
