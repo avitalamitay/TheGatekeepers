@@ -4,49 +4,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeBtn = document.getElementById('theme-toggle');
     const body = document.body;
     
-    themeBtn.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        if (body.classList.contains('light-mode')) {
-            themeBtn.textContent = 'לגחלת (מצב אפל)';
-        } else {
-            themeBtn.textContent = 'לעולם האנושי (מצב בהיר)';
-        }
-    });
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                themeBtn.textContent = 'לגחלת (מצב אפל)';
+            } else {
+                themeBtn.textContent = 'לעולם האנושי (מצב בהיר)';
+            }
+        });
+    }
 
     // --- 2. מחולל רעיונות לדמויות ---
     const generateBtn = document.getElementById('generate-btn');
     const resultText = document.getElementById('generator-result');
 
-    // את יכולה להוסיף או לשנות את המילים כאן:
     const creatures = [
         "קנטאורית",
-         "סירנה", 
-         "רוח יער", 
-         "גורגונה", 
-         "פיה", 
-         "קיטסונה", 
-         "ערפד", 
-         "שדת אש", 
-         "נימפת מים",
+        "סירנה", 
+        "רוח יער", 
+        "גורגונה", 
+        "פיה", 
+        "קיטסונה", 
+        "ערפד", 
+        "שדת אש", 
+        "נימפת מים",
         "ג׳ין (ג׳יני)",
-        "⁠עיפרית (ג׳ין אש עוצמתי) ",
-        "⁠סירנה",
-        "⁠אמפוסה (מפלצת דמוית אנוש שמפתה בני אדם וטורפת אותם)",
-        "⁠מינוטאור",
-        "⁠סימורג/רוֹק (ציפורי־ענק עם ת׳מות שונות שמחוברות אליהן)",
+        "עיפרית (ג׳ין אש עוצמתי)",
+        "אמפוסה (מפלצת דמוית אנוש שמפתה בני אדם וטורפת אותם)",
+        "מינוטאור",
+        "סימורג/רוֹק (ציפורי־ענק עם ת׳מות שונות שמחוברות אליהן)",
         "כימרה",
-        "⁠למאסו (יישות מגינה עם ראש אדם, גוף של אריה וכנפיים של עיט)",
-        "⁠גריפין/היפוגריף",
-        "⁠אחת ממאות הווריאציות של דרקונים",
-        "⁠נחש־ים",
-        "⁠סלקי (פיות כלבי ים שמסוגלות להסיר את הפרווה שלהן ולהפוך אנושיות)",
-        "⁠ראקשאסה (מפלצות אוכלות אדם מהמיתולוגיה ההודית)",
-        "⁠פוקה (משני צורה תעלולנים)",
-        "⁠נאגה (אנשי נחש, מקושרים לאוצרות ולהגנה)",
-        "⁠באנשי (רוח שהיללה שלה מבשרת על מוות של אהוב)",
-        "⁠קיטסונה (רוחות שועל)",
-        "⁠צ׳ופקאברה (מפלצת שאוכלת עצמות של חיות ואנשים ומשאירה את שאר הגוף מאחור)"
-        ];
+        "למאסו (יישות מגינה עם ראש אדם, גוף של אריה וכנפיים של עיט)",
+        "גריפין/היפוגריף",
+        "אחת ממאות הווריאציות של דרקונים",
+        "נחש־ים",
+        "סלקי (פיות כלבי ים שמסוגלות להסיר את הפרווה שלהן ולהפוך אנושיות)",
+        "ראקשאסה (מפלצות אוכלות אדם מהמיתולוגיה ההודית)",
+        "פוקה (משני צורה תעלולנים)",
+        "נאגה (אנשי נחש, מקושרים לאוצרות ולהגנה)",
+        "באנשי (רוח שהיללה שלה מבשרת על מוות של אהוב)",
+        "קיטסונה (רוחות שועל)",
+        "צ׳ופקאברה (מפלצת שאוכלת עצמות של חיות ואנשים ומשאירה את שאר הגוף מאחור)"
+    ];
+
     const triggers = [
         "כששמעת שיר ספציפי ברדיו של מונית",
         "כשהיית קרובה למוות בתאונת דרכים",
@@ -58,11 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
         "במהלך הופעה חיה שבה המוזיקה הרעידה לך את העצמות",
         "כשנשבר לך הלב בצורה שפשוט לא ידעת איך להכיל",
         "כשנתקעת בחוץ באמצע סופת ברקים לא הגיונית",
-        "כששחית בים בלילה",
+        "כששחית בים בלילה והמים פתאום התחילו לזהור סביבך",
         "כשחתול רחוב עם עיניים מוזרות סירב להפסיק לעקוב אחרייך",
         "באמצע משמרת לילה משעממת במיוחד, כשהשעון פתאום עצר מלכת",
-        "כשמישהי זרה ברכבת לחשה לך מילה בשפה שלא קיימת - והבנת אותה",
-        "אחרי חלום מוחשי כל כך שהמשיך גם אחרי שהתעוררת",
+        "כשמישהי זרה ברכבת לחשה לך מילה בשפה שלא קיימת – והבנת אותה",
+        "מתוך חלום מוחשי כל כך שהמשיך גם אחרי שהתעוררת",
         "כשבהית יותר מדי זמן במדורה והאש בהתה בך חזרה",
         "באמצע התקף חרדה בסופרמרקט בשישי בצהריים",
         "כשקראת אגדה ישנה והבנת שהסוף שלה כתוב לגמרי לא נכון",
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "כשניגנת או שרת מנגינה שמעולם לא למדת, ולא הצלחת להפסיק",
         "כשהרחת פתאום ברחוב ריח של פרחים שמעולם לא צמחו בעולם הזה",
         "כשקעקוע שעשית מתוך גחמה פתאום הרגיש כאילו הוא זז מתחת לעור",
-        "כשכתבת סיפור באמצע הלילה, וקלטת שזה בעצם יומן זיכרונות",
+        "כשכתבת סיפור באמצע הלילה, ובבוקר קלטת שזה בעצם יומן זיכרונות",
         "כשמדדת בגד בחנות יד שנייה וזיהית במראה פנים אחרות לגמרי",
         "בהפסקת חשמל, כשהחושך בחדר התחיל ללחוש לך בשמך האמיתי",
         "כשההשתקפות שלך בשלולית של חורף סירבה לזוז יחד איתך",
@@ -83,89 +84,100 @@ document.addEventListener('DOMContentLoaded', () => {
         "אחרי לילה לבן של 40 שעות בלי שינה, כשהמציאות פשוט נסדקה לך מול העיניים",
         "במסיבת פורים, כשהבנת שהתחפושת של מישהי ברחבה היא ממש לא תחפושת"
     ];
+
     const ages = [
-        "בגיל 18",
-        "בגיל 24",
-        "ממש לפני חודש",
-        "לפני חצי שנה",
-        "לפני ארבעה ימים ו15 שעות",
-        "בגיל 12", 
-        "בגיל 7", 
-        "בגיל 5", 
-        "בגיל 8", 
-        "בגיל 10", 
-        "בגיל 14", 
-        "בגיל 15", 
-        "בגיל 16", 
-        "בגיל 17", 
-        "בגיל 19", 
-        "בגיל 20", 
-        "בגיל 21", 
-        "בגיל 22", 
-        "בגיל 23", 
-        "בגיל 25", 
-        "בגיל 26", 
-        "בגיל 27"
-        ];
+        "בגיל 18", "בגיל 24", "ממש לפני חודש", "לפני חצי שנה",
+        "לפני ארבעה ימים ו-15 שעות", "בגיל 12", "בגיל 7", "בגיל 5",
+        "בגיל 8", "בגיל 10", "בגיל 14", "בגיל 15", "בגיל 16",
+        "בגיל 17", "בגיל 19", "בגיל 20", "בגיל 21", "בגיל 22",
+        "בגיל 23", "בגיל 25", "בגיל 26", "בגיל 27"
+    ];
 
-    generateBtn.addEventListener('click', () => {
-        const randomCreature = creatures[Math.floor(Math.random() * creatures.length)];
-        const randomTrigger = triggers[Math.floor(Math.random() * triggers.length)];
-        const randomAge = ages[Math.floor(Math.random() * ages.length)];
-        
-        resultText.textContent = `היית ${randomCreature}, ועברת התלקחות ${randomAge}, ${randomTrigger}.`;
-    });
+    if (generateBtn && resultText) {
+        generateBtn.addEventListener('click', () => {
+            const randomCreature = creatures[Math.floor(Math.random() * creatures.length)];
+            const randomTrigger = triggers[Math.floor(Math.random() * triggers.length)];
+            const randomAge = ages[Math.floor(Math.random() * ages.length)];
+            
+            resultText.textContent = `היית ${randomCreature}, ועברת התלקחות ${randomAge}, ${randomTrigger}.`;
+        });
+    }
 
-    // --- 3. טיימר ספירה לאחור למפגש אפס ---
-    // שנו את התאריך והשעה כאן (פורמט: שעה:דקות:שניות חודש יום, שנה). 
-    const targetDate = new Date("November 16, 2026 18:00:00").getTime();
+    // --- 3. טיימר ספירה לאחור למפגש הבא מתוך רשימת התאריכים ---
+    const sessionDates = [
+        "2026-12-05T18:00:00",
+        "2027-01-02T18:00:00",
+        "2027-02-06T18:00:00",
+        "2027-03-13T18:00:00",
+        "2027-04-03T18:00:00",
+        "2027-05-01T18:00:00",
+        "2027-06-05T18:00:00",
+        "2027-07-03T18:00:00",
+        "2027-08-07T18:00:00",
+        "2027-09-04T18:00:00",
+        "2027-10-02T18:00:00",
+        "2027-11-06T18:00:00"
+    ].map(dateStr => new Date(dateStr).getTime());
 
-    const updateTimer = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+    const countdownEl = document.getElementById("countdown");
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
 
-        if (distance < 0) {
-            clearInterval(updateTimer);
-            document.getElementById("countdown").innerHTML = "המפגש כבר התחיל!";
-            return;
-        }
+    if (countdownEl && daysEl && hoursEl && minutesEl && secondsEl) {
+        const updateTimer = () => {
+            const now = new Date().getTime();
+            // מוצא את התאריך הראשון ברשימה שעדיין נמצא בעתיד
+            const nextSession = sessionDates.find(date => date > now);
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            if (!nextSession) {
+                countdownEl.innerHTML = "כל המפגשים הסתיימו!";
+                clearInterval(timerInterval);
+                return;
+            }
 
-        document.getElementById("days").textContent = days.toString().padStart(2, '0');
-        document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
-        document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
-        document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
-    }, 1000);
+            const distance = nextSession - now;
 
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            daysEl.textContent = days.toString().padStart(2, '0');
+            hoursEl.textContent = hours.toString().padStart(2, '0');
+            minutesEl.textContent = minutes.toString().padStart(2, '0');
+            secondsEl.textContent = seconds.toString().padStart(2, '0');
+        };
+
+        updateTimer(); // הפעלה מיידית כדי שלא יראו 00 בשנייה הראשונה
+        const timerInterval = setInterval(updateTimer, 1000);
+    }
 
     // --- 4. הדלת הסודית של הקהילה ---
     const secretDoor = document.getElementById('secret-door');
     const secretModal = document.getElementById('secret-modal');
     const closeSecretBtn = document.getElementById('close-secret');
 
-    secretDoor.addEventListener('click', () => {
-        secretModal.classList.add('active');
-    });
+    if (secretDoor && secretModal && closeSecretBtn) {
+        secretDoor.addEventListener('click', () => {
+            secretModal.classList.add('active');
+        });
 
-    closeSecretBtn.addEventListener('click', () => {
-        secretModal.classList.remove('active');
-    });
+        closeSecretBtn.addEventListener('click', () => {
+            secretModal.classList.remove('active');
+        });
+    }
 
     // --- 5. תפריט מובייל (המבורגר) ---
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
 
-    if(mobileBtn && navLinks) {
-        // פתיחה וסגירה של התפריט בלחיצה על ההמבורגר
+    if (mobileBtn && navLinks) {
         mobileBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
-        // סגירה אוטומטית של התפריט אחרי שלוחצים על אחד הקישורים (כדי שהמסך לא יישאר חסום)
         const navItems = navLinks.querySelectorAll('a');
         navItems.forEach(item => {
             item.addEventListener('click', () => {
