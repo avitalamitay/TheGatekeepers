@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
 
-    // --- 1. מצב יום / הגחלת (Theme Toggle) ---
+    // 1. מצב יום / הגחלת
     const themeBtn = document.getElementById('theme-toggle');
     const body = document.body;
     
     if (themeBtn) {
-        themeBtn.addEventListener('click', () => {
+        themeBtn.addEventListener('click', function() {
             body.classList.toggle('light-mode');
             if (body.classList.contains('light-mode')) {
                 themeBtn.textContent = 'לגחלת (מצב אפל)';
@@ -15,19 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. מחולל רעיונות לדמויות ---
+    // 2. מחולל רעיונות לדמויות
     const generateBtn = document.getElementById('generate-btn');
     const resultText = document.getElementById('generator-result');
 
     const creatures = [
         "קנטאורית",
-        "סירנה", 
-        "רוח יער", 
-        "גורגונה", 
-        "פיה", 
-        "קיטסונה", 
-        "ערפד", 
-        "שדת אש", 
+        "סירנה",
+        "רוח יער",
+        "גורגונה",
+        "פיה",
+        "קיטסונה",
+        "ערפד",
+        "שדת אש",
         "נימפת מים",
         "ג׳ין (ג׳יני)",
         "עיפרית (ג׳ין אש עוצמתי)",
@@ -94,30 +94,31 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     if (generateBtn && resultText) {
-        generateBtn.addEventListener('click', () => {
+        generateBtn.addEventListener('click', function() {
             const randomCreature = creatures[Math.floor(Math.random() * creatures.length)];
             const randomTrigger = triggers[Math.floor(Math.random() * triggers.length)];
             const randomAge = ages[Math.floor(Math.random() * ages.length)];
             
-            resultText.textContent = `היית ${randomCreature}, ועברת התלקחות ${randomAge}, ${randomTrigger}.`;
+            resultText.textContent = "היית " + randomCreature + ", ועברת התלקחות " + randomAge + ", " + randomTrigger + ".";
         });
     }
 
-    // --- 3. טיימר ספירה לאחור למפגש הבא מתוך רשימת התאריכים ---
+    // 3. טיימר ספירה לאחור למפגש הבא
+    // שימוש בתאריכים מפורשים (חודש ב-JS מתחיל מ-0: ינואר=0, דצמבר=11)
     const sessionDates = [
-        "2026-12-05T18:00:00",
-        "2027-01-02T18:00:00",
-        "2027-02-06T18:00:00",
-        "2027-03-13T18:00:00",
-        "2027-04-03T18:00:00",
-        "2027-05-01T18:00:00",
-        "2027-06-05T18:00:00",
-        "2027-07-03T18:00:00",
-        "2027-08-07T18:00:00",
-        "2027-09-04T18:00:00",
-        "2027-10-02T18:00:00",
-        "2027-11-06T18:00:00"
-    ].map(dateStr => new Date(dateStr).getTime());
+        new Date(2026, 11, 5, 18, 0, 0).getTime(),  // 5/12/26
+        new Date(2027, 0, 2, 18, 0, 0).getTime(),   // 2/1/27
+        new Date(2027, 1, 6, 18, 0, 0).getTime(),   // 6/2/27
+        new Date(2027, 2, 13, 18, 0, 0).getTime(),  // 13/3/27
+        new Date(2027, 3, 3, 18, 0, 0).getTime(),   // 3/4/27
+        new Date(2027, 4, 1, 18, 0, 0).getTime(),   // 1/5/27
+        new Date(2027, 5, 5, 18, 0, 0).getTime(),   // 5/6/27
+        new Date(2027, 6, 3, 18, 0, 0).getTime(),   // 3/7/27
+        new Date(2027, 7, 7, 18, 0, 0).getTime(),   // 7/8/27
+        new Date(2027, 8, 4, 18, 0, 0).getTime(),   // 4/9/27
+        new Date(2027, 9, 2, 18, 0, 0).getTime(),   // 2/10/27
+        new Date(2027, 10, 6, 18, 0, 0).getTime()   // 6/11/27
+    ];
 
     const countdownEl = document.getElementById("countdown");
     const daysEl = document.getElementById("days");
@@ -126,14 +127,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const secondsEl = document.getElementById("seconds");
 
     if (countdownEl && daysEl && hoursEl && minutesEl && secondsEl) {
-        const updateTimer = () => {
+        let timerInterval;
+
+        function updateTimer() {
             const now = new Date().getTime();
-            // מוצא את התאריך הראשון ברשימה שעדיין נמצא בעתיד
-            const nextSession = sessionDates.find(date => date > now);
+            let nextSession = null;
+
+            for (let i = 0; i < sessionDates.length; i++) {
+                if (sessionDates[i] > now) {
+                    nextSession = sessionDates[i];
+                    break;
+                }
+            }
 
             if (!nextSession) {
                 countdownEl.innerHTML = "כל המפגשים הסתיימו!";
-                clearInterval(timerInterval);
+                if (timerInterval) clearInterval(timerInterval);
                 return;
             }
 
@@ -144,43 +153,43 @@ document.addEventListener('DOMContentLoaded', () => {
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            daysEl.textContent = days.toString().padStart(2, '0');
-            hoursEl.textContent = hours.toString().padStart(2, '0');
-            minutesEl.textContent = minutes.toString().padStart(2, '0');
-            secondsEl.textContent = seconds.toString().padStart(2, '0');
-        };
+            daysEl.textContent = String(days).padStart(2, '0');
+            hoursEl.textContent = String(hours).padStart(2, '0');
+            minutesEl.textContent = String(minutes).padStart(2, '0');
+            secondsEl.textContent = String(seconds).padStart(2, '0');
+        }
 
-        updateTimer(); // הפעלה מיידית כדי שלא יראו 00 בשנייה הראשונה
-        const timerInterval = setInterval(updateTimer, 1000);
+        updateTimer();
+        timerInterval = setInterval(updateTimer, 1000);
     }
 
-    // --- 4. הדלת הסודית של הקהילה ---
+    // 4. הדלת הסודית של הקהילה
     const secretDoor = document.getElementById('secret-door');
     const secretModal = document.getElementById('secret-modal');
     const closeSecretBtn = document.getElementById('close-secret');
 
     if (secretDoor && secretModal && closeSecretBtn) {
-        secretDoor.addEventListener('click', () => {
+        secretDoor.addEventListener('click', function() {
             secretModal.classList.add('active');
         });
 
-        closeSecretBtn.addEventListener('click', () => {
+        closeSecretBtn.addEventListener('click', function() {
             secretModal.classList.remove('active');
         });
     }
 
-    // --- 5. תפריט מובייל (המבורגר) ---
+    // 5. תפריט מובייל (המבורגר)
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const navLinks = document.getElementById('nav-links');
 
     if (mobileBtn && navLinks) {
-        mobileBtn.addEventListener('click', () => {
+        mobileBtn.addEventListener('click', function() {
             navLinks.classList.toggle('active');
         });
 
         const navItems = navLinks.querySelectorAll('a');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
+        navItems.forEach(function(item) {
+            item.addEventListener('click', function() {
                 navLinks.classList.remove('active');
             });
         });
